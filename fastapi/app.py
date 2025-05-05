@@ -3,9 +3,13 @@ from pydantic import BaseModel
 import pickle
 import pandas as pd
 from minio import Minio
-# import urllib.request 
-# import sklearn
-# import catboost
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+ACCESS_KEY = os.getenv('MINIO_ACCESS_KEY')
+SECRET_KEY = os.getenv('MINIO_SECRET_KEY')
 
 app = FastAPI()
 
@@ -15,8 +19,8 @@ app = FastAPI()
 # upload from s3 (minio)
 # model = pickle.load(urllib.request.urlopen("http://s3:9000/api/v1/download-shared-object/aHR0cDovLzEyNy4wLjAuMTo5MDk5L2NyZWRpdC1tb2RlbC9tb2RlbC5wa2w_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD0zSDZaQ0QyU1hQMFlFNUhJUFYzSiUyRjIwMjUwNTA0JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDUwNFQxNTI3MjJaJlgtQW16LUV4cGlyZXM9NDMyMDAmWC1BbXotU2VjdXJpdHktVG9rZW49ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmhZMk5sYzNOTFpYa2lPaUl6U0RaYVEwUXlVMWhRTUZsRk5VaEpVRll6U2lJc0ltVjRjQ0k2TVRjME5qTTRNemt3TlN3aWNHRnlaVzUwSWpvaWEyOXVjMmx1TVRrNE9DSjkuSHNuUXZFcEVzNWN1NUY5Ym5BZ2pNTVQ4dlBGTERjZlhGYmR6bEwyMkUwakszRkNUSVhWaUw4aVVLUkhIMXh6WWF3emtjdXJWdUhuRWJPOHhjamxSRlEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JnZlcnNpb25JZD1udWxsJlgtQW16LVNpZ25hdHVyZT1hNzc0MjgyYzFkNTk4ODhiODRmOTZmNzhjMzcxNWVlOTE5MjJkZTViNmZiMTkwOGU4YWNlMWJlM2FlYmY5ZjMz"))
 client = Minio("s3:9099",
-        access_key="st9CYSSrSb5VYGj58Ynx",
-        secret_key="SGRuqVoB5Ghn5GP4XNJi16RR2cVXJ6sCnvphHHUL",
+        access_key=ACCESS_KEY,
+        secret_key=SECRET_KEY,
         secure=False
 )
 model = pickle.load(client.get_object('credit-model', 'model.pkl'))

@@ -1,0 +1,7 @@
+[core]
+    remote = minio
+['remote "minio"']
+    url = s3://credit-model
+    endpointurl = http://localhost:9099
+    access_key_id = st9CYSSrSb5VYGj58Ynx
+    secret_access_key = SGRuqVoB5Ghn5GP4XNJi16RR2cVXJ6sCnvphHHUL
